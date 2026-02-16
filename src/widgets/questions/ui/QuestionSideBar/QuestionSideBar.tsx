@@ -1,15 +1,10 @@
-import { useState, useRef, useEffect } from 'react'
-import FiltersSearchInputIcon from '@/assets/icons/search-skills-side.svg?react'
-import FigmaSkillIcon from '@/assets/icons/skillIcons/figma-skill-icon.svg?react'
-import FiltersOpenButtonIcon from '@/assets/icons/open-skills-side.svg?react'
-import './QuestionSideBar.scss'
+import { SearchIcon as SearchInputIcon } from '@/shared/assets/sidebar'
+import { CloseIcon as CloseButtonIcon } from '@/shared/assets/sidebar'
+import FilterLayout from '@/shared/ui/FilterLayout/FilterLayout'
+import SkillsList from '@/feature/skills/ui/SkillsList/SkillsList'
+import styles from './QuestionSideBar.module.scss'
 
-const COLLAPSED_HEIGHT = 120
-
-const QuestionSideBar = ({ showFilters, toggleVisibleSidebar, isOpen, setIsOpen }) => {
-  const [showExpandBtn, setShowExpandBtn] = useState(false)
-  const skillListRef = useRef<HTMLDivElement>(null)
-
+const QuestionSideBar = ({ showFilters, toggleVisibleSidebar }) => {
   const skills = [
     { id: 1, title: 'Figma' },
     { id: 2, title: 'Wireframing' },
@@ -17,59 +12,26 @@ const QuestionSideBar = ({ showFilters, toggleVisibleSidebar, isOpen, setIsOpen 
     { id: 4, title: 'Wireframing' },
     { id: 5, title: 'Figma' },
     { id: 6, title: 'React' },
-    { id: 5, title: 'Figma' },
-    { id: 6, title: 'React' },
-    { id: 5, title: 'Figma' },
-    { id: 6, title: 'React' },
+    { id: 7, title: 'Figma' },
+    { id: 8, title: 'React' },
+    { id: 9, title: 'Figma' },
+    { id: 10, title: 'React' },
   ]
 
-  useEffect(() => {
-    const checkHeight = () => {
-      if (skillListRef.current) {
-        const isToBig = skillListRef.current.scrollHeight > COLLAPSED_HEIGHT
-        setShowExpandBtn(isToBig)
-      }
-    }
-    checkHeight()
-
-    window.addEventListener('resize', checkHeight)
-
-    return () => window.removeEventListener('resize', checkHeight)
-  }, [skills])
-
   return (
-    <aside className={`filters-sidebar ${showFilters ? 'open' : ''}`}>
-      <button className="filters-sidebar-close-button" onClick={toggleVisibleSidebar}>
-        <FiltersOpenButtonIcon className="filters-close-icon" />
+    <aside className={`${styles.sidebar} ${showFilters ? styles.open : ''}`.trim()}>
+      <button className={styles.closeButton} onClick={toggleVisibleSidebar}>
+        <CloseButtonIcon className={styles.closeIcon} />
       </button>
-      <label htmlFor="skill-input" className="filters-search-input">
-        <FiltersSearchInputIcon className="filters-search-icon" />
-        <input id="skill-input" type="text" placeholder="Введите запрос..." />
+      <label htmlFor="input" className={styles.searchInputWrapper}>
+        <SearchInputIcon className={styles.searchIcon} />
+        <input id="input" type="text" placeholder="Введите запрос..." />
       </label>
-      <section className="filters-question">
-        <span className="filter-side-block-title">Категории вопросов</span>
-        <div
-          className="filter-buttons"
-          ref={skillListRef}
-          style={{
-            maxHeight: isOpen ? '200px' : `${COLLAPSED_HEIGHT}px`,
-            overflow: 'hidden',
-            overflowY: isOpen ? 'auto' : 'hidden',
-            transition: 'max-height 0.3s ease-in-out',
-          }}
-        >
-          {skills.map((skill) => (
-            <button className="button">
-              <FigmaSkillIcon />
-              {skill.title}
-            </button>
-          ))}
-        </div>
-        {showExpandBtn && (
-          <button className={'filtersExpandButton'} onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? 'Свернуть' : 'Показать больше'}
-          </button>
-        )}
+      <section className={styles.filtersQuestion}>
+        <FilterLayout
+          renderItem={() => <SkillsList skills={skills} />}
+          title={'Категории вопросов'}
+        />
       </section>
     </aside>
   )

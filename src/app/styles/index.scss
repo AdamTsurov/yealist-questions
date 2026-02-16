@@ -4,10 +4,14 @@
   box-sizing: border-box;
 }
 
+html {
+  // scrollbar-gutter: stable;
+}
+
 body {
   margin: 0;
   padding: 0;
-  width: 100%; 
+  width: 100%;
   font-family: Manrope, sans-serif;
   font-weight: light;
   font-style: Medium;
@@ -15,6 +19,9 @@ body {
   line-height: 120%;
   letter-spacing: 0%;
   color: rgba(25, 25, 25, 1);
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  background-color: #f8f8f8;
 }
 
 button,
