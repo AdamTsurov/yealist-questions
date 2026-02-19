@@ -34,6 +34,7 @@ const QuestionItem = ({ title, shortAnswer, rate, complexity, itemImage }) => {
           </a>
         </div>
       </li>
+        
     </>
   )
 }
