@@ -2,8 +2,9 @@ import { ChevronIcon } from '@/shared/assets/questions'
 import { ArrowRight } from '@/shared/assets/questions'
 import styles from './QuestionItem.module.scss'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const QuestionItem = ({ title, shortAnswer, rate, complexity, itemImage }) => {
+const QuestionItem = ({ id, title, shortAnswer, rate, complexity, itemImage }) => {
   const [isOpened, setIsOpened] = useState(false)
 
   const toggleOpen = () => setIsOpened((prev) => !prev)
@@ -29,9 +30,9 @@ const QuestionItem = ({ title, shortAnswer, rate, complexity, itemImage }) => {
           </div>
           <img className={styles.itemImage} src={itemImage} />
           <p className={styles.itemQuestion}>{shortAnswer}</p>
-          <a href="#" className={styles.turnupQuestionSpecific}>
+          <Link to={`question/${id}`} className={styles.turnupQuestionSpecific}>
             Подробнее <ArrowRight />
-          </a>
+          </Link>
         </div>
       </li>
         

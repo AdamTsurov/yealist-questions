@@ -38,6 +38,7 @@ const QuestionList = ({ showFilters, toggleVisibleSidebar }) => {
         {questions.map((item) => (
           <QuestionItem
             key={item.id}
+            id={item.id}
             title={item.title}
             shortAnswer={item.shortAnswer}
             rate={item.rate}
