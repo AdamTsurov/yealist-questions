@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.arrow svg {
+  min-width: 28px;
+  min-height: 28px;
+}
+
+
+
