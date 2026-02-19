@@ -1,7 +1,7 @@
 import { SearchIcon as SearchInputIcon } from '@/shared/assets/sidebar'
 import { CloseIcon as CloseButtonIcon } from '@/shared/assets/sidebar'
 import FilterLayout from '@/shared/ui/FilterLayout/FilterLayout'
-import SkillsList from '@/feature/skills/ui/SkillsList/SkillsList'
+import SkillsList from '@/feature/questionFilters/ui/SkillsList/SkillsList'
 import styles from './QuestionSideBar.module.scss'
 
 const QuestionSideBar = ({ showFilters, toggleVisibleSidebar }) => {

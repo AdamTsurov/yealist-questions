@@ -2,6 +2,7 @@ import { OpenIcon as OpenButtonIcon  } from '@/shared/assets/sidebar'
 import itemImage from '@/assets/icons/list-item-img.png'
 import QuestionItem from '@/entities/questions/ui/QuestionItem/QuestionItem'
 import styles from './QuestionList.module.scss'
+import QuestionsPagination from '@/feature/questionPagination/ui/QuestionsPagination'
 
 const QuestionList = ({ showFilters, toggleVisibleSidebar }) => {
   const questions = [
@@ -45,6 +46,7 @@ const QuestionList = ({ showFilters, toggleVisibleSidebar }) => {
           />
         ))}
       </ul>
+      <QuestionsPagination total={100} limit={3} />
     </div>
   )
 }
