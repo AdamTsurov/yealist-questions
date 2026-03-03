@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
 import FigmaSkillIcon from '@/assets/icons/skillIcons/figma-skill-icon.svg?react'
-import styles from './SkillsList.module.scss'
+import styles from './ComplexityList.module.scss'
 
 const COLLAPSED_HEIGHT = 120
 
-const SkillsList = ({ skills }) => {
+const ComplexityList = ({ skills }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [showExpandBtn, setShowExpandBtn] = useState(false)
   const skillListRef = useRef<HTMLDivElement>(null)
@@ -52,4 +52,4 @@ const SkillsList = ({ skills }) => {
   )
 }
 
-export default SkillsList
+export default ComplexityList

@@ -1,11 +1,9 @@
-import QuestionList from '@/widgets/questions/ui/QuestionList/QuestionList'
-import QuestionSideBar from '@/widgets/questions/ui/QuestionSideBar/QuestionSideBar'
 import { useState } from 'react'
 import styles from './QuestionPage.module.scss'
+import { QuestionFilters, QuestionList } from '@/widgets/questions'
 
 function QuestionPage() {
   const [showFilters, setShowFilters] = useState(false)
-  
 
   const toggleVisibleSidebar = () => {
     setShowFilters((prev) => !prev)
@@ -14,10 +12,7 @@ function QuestionPage() {
   return (
     <main className={styles.main}>
       <QuestionList showFilters={showFilters} toggleVisibleSidebar={toggleVisibleSidebar} />
-      <QuestionSideBar
-        showFilters={showFilters}
-        toggleVisibleSidebar={toggleVisibleSidebar}
-      />
+      <QuestionFilters showFilters={showFilters} toggleVisibleSidebar={toggleVisibleSidebar} />
     </main>
   )
 }

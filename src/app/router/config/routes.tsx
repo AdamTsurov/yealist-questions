@@ -1,5 +1,6 @@
 import Main from '@/app/layouts/Main'
 import { QuestionPageLazy } from '@/pages/questions'
+import { QuestionSpecificPageLazy } from '@/pages/questionSpecific'
 import Spinner from '@/shared/ui/Spinner/Spinner'
 import { Suspense } from 'react'
 
@@ -17,7 +18,11 @@ export const routes = [
       },
       {
         path: 'question/:questionId',
-        element: <h2>Заглушка</h2>,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <QuestionSpecificPageLazy />
+          </Suspense>
+        ),
       },
       {
         path: '*',
