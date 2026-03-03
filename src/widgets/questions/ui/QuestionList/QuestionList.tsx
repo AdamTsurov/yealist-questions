@@ -1,8 +1,8 @@
-import { OpenIcon as OpenButtonIcon  } from '@/shared/assets/sidebar'
+import { OpenIcon as OpenButtonIcon } from '@/shared/assets/filters'
 import itemImage from '@/assets/icons/list-item-img.png'
-import QuestionItem from '@/entities/questions/ui/QuestionItem/QuestionItem'
 import styles from './QuestionList.module.scss'
-import QuestionsPagination from '@/feature/questionPagination/ui/QuestionsPagination'
+import { QuestionItem } from '@/entities/questions'
+import { QuestionsPagination } from '@/feature/questionPagination'
 
 const QuestionList = ({ showFilters, toggleVisibleSidebar }) => {
   const questions = [
@@ -38,6 +38,7 @@ const QuestionList = ({ showFilters, toggleVisibleSidebar }) => {
         {questions.map((item) => (
           <QuestionItem
             key={item.id}
+            id={item.id}
             title={item.title}
             shortAnswer={item.shortAnswer}
             rate={item.rate}

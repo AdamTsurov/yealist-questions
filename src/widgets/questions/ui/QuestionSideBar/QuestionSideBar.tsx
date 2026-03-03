@@ -1,39 +1,26 @@
-import { SearchIcon as SearchInputIcon } from '@/shared/assets/sidebar'
-import { CloseIcon as CloseButtonIcon } from '@/shared/assets/sidebar'
-import FilterLayout from '@/shared/ui/FilterLayout/FilterLayout'
-import SkillsList from '@/feature/questionFilters/ui/SkillsList/SkillsList'
+import Metrics from '@/shared/ui/Metrics/Metrics'
 import styles from './QuestionSideBar.module.scss'
+import Keywords from '@/shared/ui/Keywords/Keywords'
+import { SkillsList } from '@/feature/questionFilters'
 
-const QuestionSideBar = ({ showFilters, toggleVisibleSidebar }) => {
-  const skills = [
-    { id: 1, title: 'Figma' },
-    { id: 2, title: 'Wireframing' },
-    { id: 3, title: 'React' },
-    { id: 4, title: 'Wireframing' },
-    { id: 5, title: 'Figma' },
-    { id: 6, title: 'React' },
-    { id: 7, title: 'Figma' },
-    { id: 8, title: 'React' },
-    { id: 9, title: 'Figma' },
-    { id: 10, title: 'React' },
-  ]
+const QuestionSideBar = ({ data }) => {
+  const { rate, complexity, questionSkills, keywords } = data
 
   return (
-    <aside className={`${styles.sidebar} ${showFilters ? styles.open : ''}`.trim()}>
-      <button className={styles.closeButton} onClick={toggleVisibleSidebar}>
-        <CloseButtonIcon className={styles.closeIcon} />
-      </button>
-      <label htmlFor="input" className={styles.searchInputWrapper}>
-        <SearchInputIcon className={styles.searchIcon} />
-        <input id="input" type="text" placeholder="Введите запрос..." />
-      </label>
-      <section className={styles.filtersQuestion}>
-        <FilterLayout
-          renderItem={() => <SkillsList skills={skills} />}
-          title={'Категории вопросов'}
-        />
-      </section>
-    </aside>
+    <div className={styles.sidebar}>
+      <div className={styles.metrics}>
+        <p>Уровень: </p>
+        <Metrics rate={rate} complexity={complexity} />
+      </div>
+      <div className={styles.skills}>
+        <p>Навыки: </p>
+        <SkillsList skills={questionSkills} />
+      </div>
+      <div className={styles.keywords}>
+        <p>Ключевые слова: </p>
+        <Keywords keywords={keywords} />
+      </div>
+    </div>
   )
 }
 
