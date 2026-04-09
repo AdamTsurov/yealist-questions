@@ -1,6 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type RefObject } from 'react'
 
-export const useResize = (data, ref, collapsedHeight) => {
+export const useResize = (
+  data: unknown[], // или конкретный тип, например Skill[]
+  ref: RefObject<HTMLDivElement | null>,
+  collapsedHeight: number
+) => {
   const [showExpandBtn, setShowExpandBtn] = useState(false)
   const items = data
 
@@ -16,7 +20,7 @@ export const useResize = (data, ref, collapsedHeight) => {
     window.addEventListener('resize', checkHeight)
 
     return () => window.removeEventListener('resize', checkHeight)
-  }, [items.data, ref, collapsedHeight])
+  }, [items, ref, collapsedHeight])
 
   return { showExpandBtn, setShowExpandBtn }
 }

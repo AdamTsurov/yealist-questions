@@ -48,15 +48,16 @@ export const MarkdownViewer: React.FC<ContentViewerProps> = ({ content }) => {
         className="content-viewer markdown-style"
         style={{
           display: '-webkit-box',
-          '-webkit-line-clamp': 3,
-          '-webkit-box-orient': 'vertical',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: 'vertical',
         }}
       >
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
-            code({ node, inline, className, children, ...props }) {
+            // @ts-ignore
+            code({ inline, className, children, ...props }) {
               const match = /language-(\w+)/.exec(className || '')
               const { ref, ...rest } = props
 
@@ -107,5 +108,5 @@ export const MarkdownViewer: React.FC<ContentViewerProps> = ({ content }) => {
     },
   }
 
-  return <div className="content-viewer html-style" >{parse(cleanHtml, htmlOptions)}</div>
+  return <div className="content-viewer html-style">{parse(cleanHtml, htmlOptions)}</div>
 }
