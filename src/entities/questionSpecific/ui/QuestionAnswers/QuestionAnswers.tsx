@@ -1,6 +1,7 @@
 import { ChevronIcon } from '@/shared/assets/questions'
 import styles from './QuestionAnswers.module.scss'
 import { useState } from 'react'
+import { MarkdownViewer } from '@/shared/lib/utils/components/MarkdownViewer'
 
 const QuestionAnswers = ({ type, shortAnswer, longAnswer }) => {
   const answerData = {
@@ -14,8 +15,8 @@ const QuestionAnswers = ({ type, shortAnswer, longAnswer }) => {
   return (
     <div className={styles.answer}>
       <h3 className={styles.title}>{answerData.title}</h3>
-      <p className={`${styles.text} ${visibleLongAnswer ? styles.open : ''}`.trim()}>
-        {answerData.text}
+      <p className={`${styles.text} ${isOpenLongAnswer ? styles.open : ''}`.trim()}>
+        <MarkdownViewer content={answerData.text}/>
       </p>
       {visibleLongAnswer && (
         <button onClick={() => setIsOpenLongAnswer(true)}>

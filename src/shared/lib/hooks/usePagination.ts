@@ -1,4 +1,9 @@
-export const usePagination = ( totalPages, currentPage, setCurrentPage ) => {
+import { setPage } from '@/feature/questionFilters/model/questionsFiltersSlice'
+import { useAppDispatch } from './redux'
+
+export const usePagination = (totalPages: number, currentPage: number) => {
+  const dispatch = useAppDispatch()
+
   const getPageNumbers = () => {
     const pages = []
     const showRange = 2
@@ -14,11 +19,11 @@ export const usePagination = ( totalPages, currentPage, setCurrentPage ) => {
       if (startPage > 2) {
         pages.push('...')
       }
-      
+
       for (let i = startPage; i <= endPage; i++) {
         pages.push(i)
       }
-      
+
       if (endPage < totalPages - 1) {
         pages.push('...')
       }
@@ -31,22 +36,22 @@ export const usePagination = ( totalPages, currentPage, setCurrentPage ) => {
 
   const pages = getPageNumbers()
 
-  const handleChangePage = (pageNumber) => {
-    setCurrentPage(pageNumber)
+  const handleChangePage = (pageNumber: number) => {
+    dispatch(setPage(pageNumber))
   }
 
   const handleNextPage = () => {
-    setCurrentPage(currentPage + 1)
+    dispatch(setPage(currentPage + 1))
   }
 
   const handlePrevPage = () => {
-    setCurrentPage(currentPage - 1)
+    dispatch(setPage(currentPage - 1))
   }
 
   return {
     pages,
     handleChangePage,
     handleNextPage,
-    handlePrevPage
+    handlePrevPage,
   }
 }
