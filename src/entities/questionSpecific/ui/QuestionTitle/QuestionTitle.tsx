@@ -1,11 +1,16 @@
 import { SidebarOpenIcon } from '@/shared/assets/questionSpecific'
 import styles from './QuestionTitle.module.scss'
-import imgsrc from '@/assets/icons/Image.png'
 
-const QuestionTitle = ({ image, title, description }) => {
+interface QuestionTitleProps {
+  image: string
+  title: string
+  description: string
+}
+
+const QuestionTitle = ({ image, title, description }: QuestionTitleProps) => {
   return (
     <div className={styles.title}>
-      {image ? <img className={styles.titleImage} src={imgsrc} /> : ''}
+      {image ? <img className={styles.titleImage} src={image} /> : ''}
       <div className={styles.titleContent}>
         <div>
           <h1 className={styles.titleText}>{title}</h1>

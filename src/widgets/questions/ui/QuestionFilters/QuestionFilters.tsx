@@ -12,7 +12,12 @@ import {
 import { useReduxInputDebounce } from '@/shared/lib/hooks/useReduxInputDebounce'
 import { setTitle } from '@/feature/questionFilters/model/questionsFiltersSlice'
 
-const QuestionFilters = ({ showFilters, toggleVisibleSidebar }) => {
+interface QuestionFiltersProps {
+  showFilters: boolean
+  toggleVisibleSidebar: () => void
+}
+
+const QuestionFilters = ({ showFilters, toggleVisibleSidebar }: QuestionFiltersProps) => {
   const selectRates = useAppSelector(selectRating)
   const complexityRanges = useAppSelector(selectComplexityRanges)
   const title = useAppSelector(selectTitle)
