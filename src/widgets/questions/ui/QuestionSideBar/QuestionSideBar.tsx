@@ -1,10 +1,13 @@
 import Metrics from '@/shared/ui/Metrics/Metrics'
 import styles from './QuestionSideBar.module.scss'
 import Keywords from '@/shared/ui/Keywords/Keywords'
-import { SkillsList } from '@/feature/questionFilters'
+import SkillsDisplay from '@/shared/ui/SkillsDisplay/SkillsDisplay'
+import EmptyState from '@/shared/ui/EmptyState/EmptyState'
 
 const QuestionSideBar = ({ data }) => {
   const { rate, complexity, questionSkills, keywords } = data
+
+  if (!questionSkills || questionSkills.data.length === 0) return <EmptyState />
 
   return (
     <div className={styles.sidebar}>
@@ -14,7 +17,7 @@ const QuestionSideBar = ({ data }) => {
       </div>
       <div className={styles.skills}>
         <p>Навыки: </p>
-        <SkillsList skills={questionSkills} />
+        <SkillsDisplay skills={questionSkills} />
       </div>
       <div className={styles.keywords}>
         <p>Ключевые слова: </p>

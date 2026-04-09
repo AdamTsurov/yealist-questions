@@ -18,9 +18,10 @@
   box-sizing: border-box;
   padding: 6px 12px 6px 12px;
   font-size: 16px;
-  &:focus {
-    border-color: rgba(106, 11, 255, 1);
-  }
+}
+
+.button.select {
+  border-color: rgba(106, 11, 255, 1);
 }
 
 .button svg {

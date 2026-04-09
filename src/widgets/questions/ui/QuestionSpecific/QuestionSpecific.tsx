@@ -1,53 +1,31 @@
-
 import styles from './QuestionSpecific.module.scss'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import QuestionSideBar from '../QuestionSidebar/QuestionSidebar'
+import QuestionSideBar from '../QuestionSideBar/QuestionSideBar'
 import { QuestionTitle, QuestionAnswers } from '@/entities/questionSpecific'
+import { useFetchQuestionByIdQuery } from '@/entities/questions/api/questionApi'
+import Spinner from '@/shared/ui/Spinner/Spinner'
+import EmptyState from '@/shared/ui/EmptyState/EmptyState'
+import ErrorMessage from '@/shared/ui/ErrorMessage/ErrorMessage'
 
 const QuestionSpecific = () => {
   const { id } = useParams()
+  const { data: question, isLoading, error, refetch } = useFetchQuestionByIdQuery(id)
 
-  const [data, setData] = useState({
-    imageSrc: 'string',
-    title: 'Event loop',
-    description: 'What is Event Loop?',
-    keywords: ['Javascript', 'React', 'Html'],
-    longAnswer:
-      'Virtual DOM (виртуальный DOM) — это программная концепция, используемая вразработке веб-приложений для повышения эффективности обновлений интерфейса. Это представление реального DOM (структуры документа, отображаемого в браузере) в памяти, которое позволяет оптимизировать изменения, минимизируя взаимодействие с реальным DOM, что ускоряет рендеринг и обновление страниц. При изменении данных приложения Virtual DOM сравнивает новое состояние с предыдущим и обновляет только те части реального DOM, которые изменились, вместо перерисовки всего документа.',
-    shortAnswer:
-      'Virtual DOM (виртуальный DOM) — это программная концепция, используемая вразработке веб-приложений для повышения эффективности обновлений интерфейса.',
-    rate: 1,
-    complexity: 3,
-    questionSkills: [
-      {
-        id: 13,
-        title: 'JAVA',
-        imageSrc: 'string',
-      },
-      {
-        id: 13,
-        title: 'JAVA',
-        imageSrc: 'string',
-      },
-      {
-        id: 13,
-        title: 'JAVA',
-        imageSrc: 'string',
-      },
-    ],
-  })
+  if (isLoading) return <Spinner />
+  if (!question) return <EmptyState />
+  if (error) return <ErrorMessage onRetry={refetch} />
 
-  const { imageSrc, title, description, shortAnswer, longAnswer } = data
+  const { imageSrc, title, description, shortAnswer, longAnswer } = question
 
   return (
     <div className={styles.specific}>
       <div className={styles.content}>
         <QuestionTitle image={imageSrc} title={title} description={description} />
-        <QuestionAnswers type={'short'} shortAnswer={shortAnswer} longAnswer={longAnswer}/>
-        <QuestionAnswers type={'long'} shortAnswer={shortAnswer} longAnswer={longAnswer}/>
+        <QuestionAnswers type={'short'} shortAnswer={shortAnswer} longAnswer={longAnswer} />
+        <QuestionAnswers type={'long'} shortAnswer={shortAnswer} longAnswer={longAnswer} />
       </div>
-      <QuestionSideBar data={data} />
+      <QuestionSideBar data={question} />
     </div>
   )
 }

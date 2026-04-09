@@ -17,7 +17,7 @@ export const routes = [
         ),
       },
       {
-        path: 'question/:questionId',
+        path: 'question/:id',
         element: (
           <Suspense fallback={<Spinner />}>
             <QuestionSpecificPageLazy />
