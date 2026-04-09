@@ -1,6 +1,11 @@
 import styles from './FilterLayout.module.scss'
 
-const FilterLayout = ({ renderItem, title }) => {
+interface FilterLayoutProps {
+  renderItem: () => React.ReactNode
+  title: string
+}
+
+const FilterLayout = ({ renderItem, title }: FilterLayoutProps) => {
   return (
     <div className={styles.wrapper}>
       <span className={styles.sideBlockTitle}>{title}</span>

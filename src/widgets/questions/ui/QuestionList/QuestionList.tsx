@@ -9,8 +9,12 @@ import { useAppSelector } from '@/shared/lib/hooks/redux'
 import Spinner from '@/shared/ui/Spinner/Spinner'
 import ErrorMessage from '@/shared/ui/ErrorMessage/ErrorMessage'
 import EmptyState from '@/shared/ui/EmptyState/EmptyState'
+interface QuestionListProps {
+  showFilters: boolean
+  toggleVisibleSidebar: () => void
+}
 
-const QuestionList = ({ showFilters, toggleVisibleSidebar }) => {
+const QuestionList = ({ showFilters, toggleVisibleSidebar }: QuestionListProps) => {
   const params = useAppSelector(selectQuestionsParams)
   const { data: questions, error, isLoading, refetch } = useFetchQuestionsQuery(params)
 
@@ -22,8 +26,11 @@ const QuestionList = ({ showFilters, toggleVisibleSidebar }) => {
     <div className={styles.questions}>
       <div className={styles.titleWrapper}>
         <h2 className={styles.questionsTitle}>Вопросы React, JavaScript</h2>
-        <button className={`${styles.sidebarOpenButton} ${showFilters ? styles.open : ''}`.trim()}>
-          <OpenButtonIcon className={styles.openIcon} onClick={toggleVisibleSidebar} />
+        <button
+          className={`${styles.sidebarOpenButton} ${showFilters ? styles.open : ''}`.trim()}
+          onClick={toggleVisibleSidebar}
+        >
+          <OpenButtonIcon className={styles.openIcon} />
         </button>
       </div>
       <ul className={styles.list}>

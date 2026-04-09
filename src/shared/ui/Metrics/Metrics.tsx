@@ -1,6 +1,11 @@
 import styles from './Metrics.module.scss'
 
-const Metrics = ({ rate, complexity }) => {
+interface MetricsProps {
+  rate: number
+  complexity: number
+}
+
+const Metrics = ({ rate, complexity }: MetricsProps) => {
   return (
     <div className={styles.metrics}>
       <div className={styles.metric}>
