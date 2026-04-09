@@ -1,0 +1,1 @@
+export { default as SidebarOpenIcon } from './icons/sidebar-button.svg?react'

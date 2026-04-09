@@ -1,14 +1,20 @@
+import type { IQuestionApiResponse } from '@/entities/questions/model/types'
+import { selectPage } from '@/feature/questionFilters/model/questionsFiltersSelectors'
+import { useAppSelector } from '@/shared/lib/hooks/redux'
 import Pagination from '@/shared/ui/Pagination/Pagination'
-import React, { useState } from 'react'
 
-const QuestionsPagination = (props) => {
-  const { total, limit } = props
+interface QuestionsPaginationProps {
+  questionResponse: IQuestionApiResponse
+}
 
-  const [selectPage, setSelectPage] = useState(1)
+const QuestionsPagination = ({ questionResponse }: QuestionsPaginationProps) => {
+  const { total, limit } = questionResponse
+
+  const page = useAppSelector(selectPage)
 
   const totalPages = Math.ceil(total / limit)
 
-  return <Pagination totalPages={totalPages} currentPage={selectPage} setCurrentPage={setSelectPage}/>
+  return <Pagination totalPages={totalPages} currentPage={page} />
 }
 
 export default QuestionsPagination

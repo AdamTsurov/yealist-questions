@@ -1,30 +1,22 @@
-import { OpenIcon as OpenButtonIcon  } from '@/shared/assets/sidebar'
+import { OpenIcon as OpenButtonIcon } from '@/shared/assets/filters'
 import itemImage from '@/assets/icons/list-item-img.png'
-import QuestionItem from '@/entities/questions/ui/QuestionItem/QuestionItem'
 import styles from './QuestionList.module.scss'
-import QuestionsPagination from '@/feature/questionPagination/ui/QuestionsPagination'
+import { QuestionItem } from '@/entities/questions'
+import { QuestionsPagination } from '@/feature/questionPagination'
+import { useFetchQuestionsQuery } from '@/entities/questions/api/questionApi'
+import { selectQuestionsParams } from '@/feature/questionFilters/model/questionsFiltersSelectors'
+import { useAppSelector } from '@/shared/lib/hooks/redux'
+import Spinner from '@/shared/ui/Spinner/Spinner'
+import ErrorMessage from '@/shared/ui/ErrorMessage/ErrorMessage'
+import EmptyState from '@/shared/ui/EmptyState/EmptyState'
 
 const QuestionList = ({ showFilters, toggleVisibleSidebar }) => {
-  const questions = [
-    {
-      id: 1,
-      title: 'Что такое Virtual DOM, и как он работает?',
-      description: 'Вопрос проверяет знание React под капотом',
-      shortAnswer:
-        'Virtual DOM (виртуальный DOM) — это программная концепция, используемая вразработке веб-приложений для повышения эффективности обновлений интерфейса. Это представление реального DOM (структуры документа, отображаемого в браузере) в памяти, которое позволяет оптимизировать изменения, минимизируя взаимодействие с реальным DOM, что ускоряет рендеринг и обновление страниц. При изменении данных приложения Virtual DOM сравнивает новое состояние с предыдущим и обновляет только те части реального DOM, которые изменились, вместо перерисовки всего документа.',
-      rate: 4,
-      complexity: 10,
-    },
-    {
-      id: 2,
-      title: 'Что такое Virtual DOM, и как он работает?',
-      description: 'Вопрос проверяет знание React под капотом',
-      shortAnswer:
-        'Virtual DOM (виртуальный DOM) — это программная концепция, используемая вразработке веб-приложений для повышения эффективности обновлений интерфейса. Это представление реального DOM (структуры документа, отображаемого в браузере) в памяти, которое позволяет оптимизировать изменения, минимизируя взаимодействие с реальным DOM, что ускоряет рендеринг и обновление страниц. При изменении данных приложения Virtual DOM сравнивает новое состояние с предыдущим и обновляет только те части реального DOM, которые изменились, вместо перерисовки всего документа.',
-      rate: 4,
-      complexity: 10,
-    },
-  ]
+  const params = useAppSelector(selectQuestionsParams)
+  const { data: questions, error, isLoading, refetch } = useFetchQuestionsQuery(params)
+
+  if (isLoading) return <Spinner />
+  if (error) return <ErrorMessage onRetry={refetch} />
+  if (!questions || questions.data.length === 0) return <EmptyState />
 
   return (
     <div className={styles.questions}>
@@ -35,9 +27,10 @@ const QuestionList = ({ showFilters, toggleVisibleSidebar }) => {
         </button>
       </div>
       <ul className={styles.list}>
-        {questions.map((item) => (
+        {questions.data.map((item) => (
           <QuestionItem
             key={item.id}
+            id={item.id}
             title={item.title}
             shortAnswer={item.shortAnswer}
             rate={item.rate}
@@ -46,7 +39,7 @@ const QuestionList = ({ showFilters, toggleVisibleSidebar }) => {
           />
         ))}
       </ul>
-      <QuestionsPagination total={100} limit={3} />
+      <QuestionsPagination questionResponse={questions} />
     </div>
   )
 }
