@@ -3,11 +3,12 @@ import styles from './QuestionSideBar.module.scss'
 import Keywords from '@/shared/ui/Keywords/Keywords'
 import SkillsDisplay from '@/shared/ui/SkillsDisplay/SkillsDisplay'
 import EmptyState from '@/shared/ui/EmptyState/EmptyState'
+import type { IQuestion } from '@/entities/questions/model/types'
 
-const QuestionSideBar = ({ data }) => {
+const QuestionSideBar = ({ data }: { data: IQuestion }) => {
   const { rate, complexity, questionSkills, keywords } = data
 
-  if (!questionSkills || questionSkills.data.length === 0) return <EmptyState />
+  if (!questionSkills) return <EmptyState />
 
   return (
     <div className={styles.sidebar}>

@@ -1,13 +1,17 @@
 import styles from './Keywords.module.scss'
 
-const Keywords = ({keywords}) => {
+interface KeywordsProps {
+  keywords: string[]
+}
+
+const Keywords = ({ keywords }: KeywordsProps) => {
   return (
     <div className={styles.keywords}>
-      {keywords.map(word => (
+      {keywords.map((word: string) => (
         <p className={styles.keyword}>#{word}</p>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default Keywords;
+export default Keywords
