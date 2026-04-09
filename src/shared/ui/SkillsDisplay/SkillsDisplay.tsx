@@ -4,7 +4,7 @@ import styles from './SkillsDisplay.module.scss'
 import { useResize } from '@/shared/lib/hooks/useResize'
 
 interface SkillsDisplayProps {
-  skills?: { id: number; title: string }[]
+  skills: { id: number; title: string }[]
   selectedIds?: number[]
   onToggle?: (id: number) => void
   maxCollapsedHeight?: number

@@ -1,8 +1,15 @@
 import { useEffect, useState, type ChangeEvent } from 'react'
 import { useDebounce } from './useDebounce'
 import { useDispatch } from 'react-redux'
+import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
-export const useReduxInputDebounce = ({ reduxValue, setReduxValue, delay = 500 }) => {
+interface UseReduxInputDebounceProps {
+  reduxValue: string;
+  setReduxValue:  ActionCreatorWithPayload<string>
+  delay?: number;
+}
+
+export const useReduxInputDebounce = ({ reduxValue, setReduxValue, delay = 500 }: UseReduxInputDebounceProps) => {
   const [inputValue, setInputValue] = useState(reduxValue)
   const debouncedValue = useDebounce(inputValue, delay)
   const dispatch = useDispatch()

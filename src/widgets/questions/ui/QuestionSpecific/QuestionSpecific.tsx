@@ -1,6 +1,6 @@
 import styles from './QuestionSpecific.module.scss'
 import { useParams } from 'react-router-dom'
-import QuestionSideBar from '../QuestionSidebar/QuestionSideBar'
+import QuestionSideBar from '../QuestionSideBar/QuestionSideBar'
 import { QuestionTitle, QuestionAnswers } from '@/entities/questionSpecific'
 import { useFetchQuestionByIdQuery } from '@/entities/questions/api/questionApi'
 import Spinner from '@/shared/ui/Spinner/Spinner'
